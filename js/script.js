@@ -14,23 +14,23 @@ The parameter is the number of people we want. I've put a parameter to make the 
 function studentList (number){
     let peopleList = document.getElementById("people");
 
-for(let i = 0; i <= number; i++){
+    for(let i = 0; i <= number; i++){
 
-    let people = document.createElement("div"); 
-    people.classList.add("people");
-    people.setAttribute("id", "people"+ i);
-    people.style.backgroundColor = randomColor();
-    people.style.cursor = "pointer";
-    peopleList.append(people);
+        let people = document.createElement("div"); 
+        people.classList.add("people");
+        people.setAttribute("id", "people"+ i);
+        people.style.backgroundColor = randomColor();
+        people.style.cursor = "pointer";
+        peopleList.append(people);
 
-    let spanIcon = document.createElement("span");
-    spanIcon.classList.add("material-icons");
-    spanIcon.innerHTML = "face";
-    people.append(spanIcon);
+        let spanIcon = document.createElement("span");
+        spanIcon.classList.add("material-icons");
+        spanIcon.innerHTML = "face";
+        people.append(spanIcon);
 
-    //To desactivate the contextmenu (right click) in all the div 
-    people.addEventListener('contextmenu', e => {
-        e.preventDefault();
+        //To desactivate the contextmenu (right click) in all the div 
+        people.addEventListener('contextmenu', e => {
+            e.preventDefault();
     });
 }
 }
@@ -65,6 +65,7 @@ function getForm(){
 people.addEventListener('mousedown',function(e){
     if(e.button === 2){
         this.append(getForm());
+
     }
 });
 
@@ -72,13 +73,18 @@ people.addEventListener('mousedown',function(e){
 
 studentList(30);
 
+// Faire une fonction pour le click droit, qui va 1: générer le form et 2 : récupérer l'ID;
+
+
 let listPeople = document.getElementsByClassName("people");
 
 for( var i = 0; i < listPeople.length; i++){
     listPeople[i].addEventListener("click", function(event){
-        console.log(this);
-    });
+    console.log(this.id);
+});
 }
+
+
 
 
 // classPeople.addEventListener("click", function(){
