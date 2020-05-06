@@ -61,6 +61,8 @@ function getForm(){
     return choiceForm;
 }
 
+
+
 //right click
 people.addEventListener('mousedown',function(e){
     if(e.button === 2){
@@ -73,7 +75,7 @@ people.addEventListener('mousedown',function(e){
 
 studentList(30);
 
-// Faire une fonction pour le click droit, qui va 1: générer le form et 2 : récupérer l'ID;
+// Faire une fonction pour le click droit, qui va, 1: générer le form et 2 : récupérer l'ID;
 
 
 let listPeople = document.getElementsByClassName("people");
