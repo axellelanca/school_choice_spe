@@ -1,49 +1,110 @@
-/* Function that get an hexadecimal color value. Return the color code */ 
+/* Function that get an hexadecimal color value. Return the color code */
+
 function randomColor (){
     let numbers = [0,1,2,3,4,5,6,7,8,9,"A","B","C","D","E","F"];
     let color = "#";
     for(let i = 0; i < 6; i++){
-        color += numbers[Math.floor(Math.random() * 15)];
+        color += numbers[Math.floor(Math.random() * 16)];
     }
     return color;
 }
 
-/* Function for generate a div and a span to get the students icons. 
-The parameter is the number of people we want  */
 
-function studentList (number){
+/* Function to generate a div and a span to get the students icons. 
+The parameter is the number of people we want. I've put a parameter to make the code dynamic oh oh oh 
+Function between parentesis : self calling function, we declare the function and we call it at the same time */
+
+(function studentList (number){
     let peopleList = document.getElementById("people");
 
-for(let i = 0; i <= number; i++){
+    for(let i = 0; i <= number; i++){
+        // Create a new div with a random background color with the function randomColor();
+        let people = document.createElement("div"); 
+        people.classList.add("people");
+        people.setAttribute("id", "people"+ i);
+        people.style.backgroundColor = randomColor();
+        people.style.cursor = "pointer";
+        peopleList.append(people);
+        // Create a new span with an icon
+        let spanIcon = document.createElement("span");
+        spanIcon.classList.add("material-icons");
+        spanIcon.innerHTML = "face";
+        people.append(spanIcon);
 
-    let people = document.createElement("div");
-    people.classList.add("people");
-    people.setAttribute("id", "people"+ i);
-    people.style.backgroundColor = randomColor();
-    people.style.cursor = "pointer";
-    peopleList.append(people);
-
-    let spanIcon = document.createElement("span");
-    spanIcon.classList.add("material-icons");
-    spanIcon.innerHTML = "face";
-    people.append(spanIcon);
-
-}
-}
-
-studentList(30);
-
-let listPeople = document.getElementsByClassName("people");
-
-for( var i = 0; i < listPeople.length; i++){
-    listPeople[i].addEventListener("click", function(event){
-        console.log(this);
+        //Desable the contextmenu (right click) in all the div 
+        people.addEventListener('contextmenu', e => {
+            e.preventDefault();
     });
 }
+})(30);
 
 
-// classPeople.addEventListener("click", function(){
-//     console.log(this.id);
-// });
+
+/* Function to create a form to select the specialty */
+
+function getForm(){
+    // Creation of the form with a select
+    let choiceForm = document.createElement("form");
+    let selectForm = document.createElement("select");
+    let submit = document.createElement("input");
+    choiceForm.append(selectForm);
+    submit.value = "Ok";
+    submit.style.cursor = "pointer";
+    submit.setAttribute("type", "submit");
+    // Creation of the select's options
+    let specialty = ["Sélectionner", "Developpement", "Design", "Marketing"];
+
+    for(let i =0; i < specialty.length; i++){
+        let option = document.createElement("option");
+        option.innerHTML = specialty[i];
+        option.value = specialty[i];
+        selectForm.append(option);
+    }
+
+    choiceForm.append(submit);
+
+    return choiceForm;
+}
+
+
+
+
+/* Function to create a new form to the right click in a div */ 
+function formAtClick(){
+
+    let listPeople = document.getElementsByClassName("people");
+    const newForm = getForm();
+
+    for( let i = 0; i < listPeople.length; i++){
+    listPeople[i].addEventListener("mousedown", function(e){ // Mousedown : when a pointing device button is pressed while the pointer is inside the element.
+        if (e.button === 2){ // 2 = the right click (0 the left click, 1 center)
+            // Having the mouse coordinates  
+            var y = e.clientY;
+            var x = e.clientX;
+            console.log(y + " " + x)
+            // using the coordinates to call the form at the same place of the click mouse
+            newForm.style.top = y / 2+ "px";
+            newForm.style.left = x / 2+ "px";
+            this.append(newForm);
+        }
+    });
+}
+}
+
+
+
+
+
+
+// studentList(30);
+formAtClick();
+
+
+
+/*
+* Manque à faire :
+*   - Récupérer value du select
+*   - Déplacer la div dans la bonne spé
+*/
 
 
