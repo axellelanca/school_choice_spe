@@ -15,20 +15,20 @@ The parameter is the number of people we want. I've put a parameter to make the 
 Function between parentesis : self calling function, we declare the function and we call it at the same time (TEST) */
 
 (function studentList (number){
-    let peopleList = document.getElementById("people");
+    let peopleList = document.getElementById('people');
 
     for(let i = 0; i <= number; i++){
         // Create a new div with a random background color with the function randomColor();
-        let people = document.createElement("div"); 
-        people.classList.add("people");
-        people.setAttribute("id", "people"+ i);
+        let people = document.createElement('div'); 
+        people.classList.add('people');
+        people.setAttribute('id','people'+ i);
         people.style.backgroundColor = randomColor();
-        people.style.cursor = "pointer";
+        people.style.cursor = 'pointer';
         peopleList.append(people);
         // Create a new span with an icon
-        let spanIcon = document.createElement("span");
-        spanIcon.classList.add("material-icons");
-        spanIcon.innerHTML = "face";
+        let spanIcon = document.createElement('span');
+        spanIcon.classList.add('material-icons');
+        spanIcon.innerHTML = 'face';
         people.append(spanIcon);
 
         //Cancel the contextmenu (right click) in all the div 
@@ -44,27 +44,26 @@ Function between parentesis : self calling function, we declare the function and
 
 function getForm(){
     // Creation of the form with a select
-    let choiceForm = document.createElement("form");
-    let selectForm = document.createElement("select");
-    let submit = document.createElement("input");
-    choiceForm.setAttribute("id", "submit");
+    let choiceForm = document.createElement('form');
+    let selectForm = document.createElement('select');
+    let submit = document.createElement('input');
+    choiceForm.setAttribute('id', 'submit');
     choiceForm.append(selectForm);
-    submit.value = "Ok";
-    submit.style.cursor = "pointer";
+    submit.value = 'Ok';
+    submit.style.cursor = 'pointer';
     
-    submit.setAttribute("type", "submit");
+    submit.setAttribute('type', 'submit');
     // Creation of the select's options
-    let specialty = ["Sélectionner", "Developpement", "Design", "Marketing"];
+    let specialty = ['Sélectionner', 'Developpement', 'Design', 'Marketing'];
 
     for(let i =0; i < specialty.length; i++){
-        let option = document.createElement("option");
+        let option = document.createElement('option');
         option.innerHTML = specialty[i];
         option.value = specialty[i];
         selectForm.append(option);
     }
 
     choiceForm.append(submit);
-    choiceForm.style.display = 'block';
 
     return choiceForm;
 }
@@ -73,18 +72,18 @@ function getForm(){
 /* Function to create a new form to the right click in a div */ 
 function formAtClick(){
 
-    let listPeople = document.getElementsByClassName("people");
+    let listPeople = document.getElementsByClassName('people');
     const newForm = getForm();
 
     for( let i = 0; i < listPeople.length; i++){
-        listPeople[i].addEventListener("mousedown", function(e){ // Mousedown : when a pointing device button is pressed while the pointer is inside the element.
+        listPeople[i].addEventListener('mousedown', function(e){ // Mousedown : when a pointing device button is pressed while the pointer is inside the element.
             if (e.button === 2){ // 2 = the right click
                 // Having the mouse coordinates  
                 var y = e.clientY;
                 var x = e.clientX;
                 // using the coordinates to call the form at the same place of the click mouse
-                newForm.style.top = y+ "px";
-                newForm.style.left = x + "px";
+                newForm.style.top = y+ 'px';
+                newForm.style.left = x + 'px';
                 newForm.style.display = 'inline-block';
                 this.append(newForm);
                 
@@ -96,47 +95,45 @@ function formAtClick(){
     //Use of preventDefault to cancel the submit event, because we don't want to reload the page
     newForm.addEventListener('submit', function(e){
         e.preventDefault();
-        // this.style.display = 'none';
+        this.style.display ='none';
         changeDiv();
     });
     
 }
 
 
+// Function to moove the clicked div to the right specialty
 function changeDiv(){
 
-    let value = document.querySelector('select').value;
+    // To get the option selected value
+    let value = document.querySelector('select').value; 
+    // To get the div where is the form, that's the one that we want to moove
     let divId = document.querySelector('form').parentNode;
     const form = document.querySelector('form');
 
     switch (value){
         case 'Developpement' :
             document.querySelector('#dev').append(divId);
-            form.style.display = 'none';
             form.reset();
             break;
 
         case 'Design' : 
             document.querySelector('#design').append(divId);
-            form.style.display = 'none';
             form.reset();
             break;
 
         case 'Marketing' : 
             document.querySelector('#mkt').append(divId);
-            form.style.display = 'none';
             form.reset();
             break;
 
         case 'Sélectionnez' :
         default:
-            alert("Merci de sélectionner une spécialité");
+            alert('Merci de sélectionner une spécialité');
     }
 
     
 }
-
-
 
 
 // studentList(30);
