@@ -11,8 +11,8 @@ function randomColor (){
 
 
 /* Function to generate a div and a span to get the students icons. 
-The parameter is the number of people we want. I've put a parameter to make the code dynamic oh oh oh 
-Function between parentesis : self calling function, we declare the function and we call it at the same time (TEST) */
+The parameter is the number of people we want.
+Function between parentesis : self calling function, we declare the function and we call it at the same time TEST*/
 
 (function studentList (number){
     let peopleList = document.getElementById('people');
@@ -136,17 +136,7 @@ function changeDiv(){
 }
 
 
-// studentList(30);
 formAtClick();
 
-
-
-
-/*
-* Manque à faire :
-*   - Récupérer value du select
-*   - Déplacer la div dans la bonne spé
-*   - Trouver comment "refresh" le formulaire
-*/
 
 
